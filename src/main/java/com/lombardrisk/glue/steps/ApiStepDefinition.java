@@ -9,6 +9,9 @@ import io.restassured.specification.RequestSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.not;
+
 public class ApiStepDefinition {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private CucumberApiCase testCase = (CucumberApiCase) TestCaseManager.getTestCase();
@@ -21,13 +24,31 @@ public class ApiStepDefinition {
         logger.info("set path " + path);
     }
 
+    @When("^set credential$")
+    public void setCredential() {
+        request = request.auth().basic("qtptest","1");
+        testCase.setRequest(request);
+    }
+
     @When("^get$")
     public void get() {
         testCase.setResponse(request.get());
     }
 
+    @When("^get (\\S+)$")
+    public void get(String path) {
+        testCase.setResponse(request.get(path));
+    }
+
     @Then("^status code is (\\d+)$")
     public void checkStatus(String code) {
         testCase.getResponse().then().statusCode(Integer.parseInt(code));
+    }
+
+    @Then("^response body")
+    public void checkBody() {
+        testCase.getResponse().then().body("executions.id", hasItems(5514,5513));
+        testCase.getResponse().then().body("executions.id", not(hasItems(0)));
+
     }
 }
