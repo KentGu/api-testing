@@ -22,6 +22,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.lombardrisk</groupId>
+            <artifactId>cobiz</artifactId>
+            <version>15.6.X-SNAPSHOT-b1</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>

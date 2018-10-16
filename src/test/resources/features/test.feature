@@ -7,3 +7,6 @@ Feature: test feature
       And get /organisationfeed
       Then status code is 200
       And response body
+      When get /interestratefeed
+      Then status code is 200
+      And interest response body

@@ -15,19 +15,19 @@ import static org.hamcrest.CoreMatchers.not;
 public class ApiStepDefinition {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private CucumberApiCase testCase = (CucumberApiCase) TestCaseManager.getTestCase();
-    private RequestSpecification request =  testCase.getRequest();
+    private RequestSpecification request = testCase.getRequest();
 
     @Given("^set get path (\\S+)$")
     public void setBasePath(String path) {
-        request = request.basePath(path);
-        testCase.setRequest(request);
+        request.basePath(path);
+//        testCase.setRequest(request);
         logger.info("set path " + path);
     }
 
     @When("^set credential$")
     public void setCredential() {
-        request = request.auth().basic("qtptest","1");
-        testCase.setRequest(request);
+        request.auth().basic("qtptest", "1");;
+//        testCase.setRequest(request);
     }
 
     @When("^get$")
@@ -47,8 +47,13 @@ public class ApiStepDefinition {
 
     @Then("^response body")
     public void checkBody() {
-        testCase.getResponse().then().body("executions.id", hasItems(5514,5513));
+        testCase.getResponse().then().body("executions.id", hasItems(5514, 551));
         testCase.getResponse().then().body("executions.id", not(hasItems(0)));
+    }
 
+    @Then("^interest response body")
+    public void interest_checkBody() {
+        testCase.getResponse().then().body("executions.id", hasItems(21513, 21514));
+        testCase.getResponse().then().body("executions.id", not(hasItems(0)));
     }
 }
