@@ -4,9 +4,9 @@
       {
         "id": 0,
         "name": "colline",
-        "url": "http://10.87.7.65:8080/",
-        "username": "ec2-user",
-        "key" : "src/test/resources/lrmtech-colline-server-singapore.pem",
+        "url": "http://localhost:8080/",
+        "username": "",
+        "key" : "",
         "hardwareInformation" : {
           "os" : "linux"
         }
